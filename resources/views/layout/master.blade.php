@@ -15,6 +15,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('template/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('template/adminlte.css') }}">
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="{{ asset('template/codemirror/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/codemirror/theme/monokai.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/codemirror/theme/material-darker.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/codemirror/theme/material-ocean.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/codemirror/theme/eclipse.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/codemirror/theme/dracula.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/codemirror/theme/solarized.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/codemirror/theme/abcdef.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/codemirror/theme/twilight.css') }}">
+
     <!-- Logo  -->
     <link rel="shortcut icon" type="" href="{{ asset('template/img/logo/laravellogo.png') }}">
 
@@ -35,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             padding-left: 20px; /* Add padding for the macOS-like window controls and copy icon */
             margin-top: 20px;
             font-family: monospace, sans-serif !important;
-            background-color: #252a37 !important;
+            background-color: #212121 !important;
             border-radius: 5px;
             height: 31px;
         }
@@ -50,9 +61,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
             margin-top: -10px;
             font-family: monospace, sans-serif !important;
             /*background-color: #252a37 !important;*/
-            background-color: #272d33 !important;
+            background-color: #212121 !important;
             border-radius: 5px;
             height: auto;
+        }
+
+        codelargekernel {
+            position: relative;
+            display: block;
+            color: #ffffff !important;
+            padding-top: 5px;
+            padding-left: 20px; /* Add padding for the macOS-like window controls and copy icon */
+            padding-bottom: 5px;
+            margin-top: -10px;
+            font-family: monospace, sans-serif !important;
+            /*background-color: #252a37 !important;*/
+            background-color: #212121 !important;
+            border-radius: 5px;
+            height: 40px !important;
         }
 
         /* Add macOS-like window controls */
@@ -185,11 +211,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         #scrollme::-webkit-scrollbar-thumb:hover {
             background-color: #555; /* Color of the scrollbar thumb on hover */
         }
-
+        .sticky-column {
+          position: sticky;
+          top: 50px;
+          height: 5vh;
+        }
     </style>
 </head>
 
-<body class="hold-transition layout-top-nav dark-mode">
+<body class="hold-transition layout-top-nav dark-mode layout-navbar-fixed text-sm">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md navbar-dark navbar-dark text-light border-bottom-0" style="background-color: #343a40;">
@@ -245,9 +275,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        @section('sidemenu')
-                            @include('partials.controlsidebar')
-                        @show
                         <!-- /.col-md-6 -->
                         @yield('body')
                     </div>
@@ -273,6 +300,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </footer>
     </div>
     <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{{ asset('template/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('template/bootstrap.bundle.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('template/adminlte.min.js') }}"></script>
+    <!-- CodeMirror -->
+    <script src="{{ asset('template/codemirror/codemirror.js') }}"></script>
+    <script src="{{ asset('template/codemirror/mode/css/css.js') }}"></script>
+    <script src="{{ asset('template/codemirror/mode/xml/xml.js') }}"></script>
+    <script src="{{ asset('template/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+    <script src="{{ asset('template/codemirror/mode/php/php.js') }}"></script>
 
     <script>
         const copyToClipboard = function (text, element) {
@@ -314,27 +355,118 @@ scratch. This page gets rid of all links and provides the needed markup only.
             copyToClipboard(codeBlock.innerText, codeBlock);
             });
         });
+
         // Open the popup
-        function openPopup() {
-            var popupModal = document.getElementById('popupModal');
+        function openPopup1() {
+            var popupModal = document.getElementById('popupModal1');
             popupModal.style.display = 'block';
         }
 
         // Close the popup
-        function closePopup() {
-            var popupModal = document.getElementById('popupModal');
+        function closePopup1() {
+            var popupModal = document.getElementById('popupModal1');
+            popupModal.style.display = 'none';
+        }
+
+        function openPopup2() {
+            var popupModal = document.getElementById('popupModal2');
+            popupModal.style.display = 'block';
+        }
+
+        // Close the popup
+        function closePopup2() {
+            var popupModal = document.getElementById('popupModal2');
             popupModal.style.display = 'none';
         }
 
     </script>
 
-    <!-- REQUIRED SCRIPTS -->
-    <!-- jQuery -->
-    <script src="{{ asset('template/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('template/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('template/adminlte.min.js') }}"></script>
+    <script>
+        document.getElementById("copyCodeKernel").addEventListener("click", function () {
+            const button = this;
+            const codeBlock = document.getElementById("codeBlockkernel");
+            const text = codeBlock.innerHTML
+                .replace(/<br\s*\/?>/gi, "\n")   // Replace <br> with newlines
+                .replace(/&lt;/g, "<")           // Decode &lt;
+                .replace(/&gt;/g, ">")           // Decode &gt;
+                .replace(/&amp;/g, "&");          // Decode &amp;
+        
+            navigator.clipboard.writeText(text).then(() => {
+                // Change button to "Copied!"
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    // Return to original button
+                    button.innerHTML = '<i class="fas fa-clipboard"></i> Copy Code';
+                }, 1500);
+            }).catch(err => {
+                //alert("Failed to copy: " + err);
+            });
+        });
+    </script>
+
+    <script>
+        function initializeCodeMirror(textareaId, buttonId, mode = "application/x-httpd-php", theme = "material-darker") {
+            const textarea = document.getElementById(textareaId);
+            const button = document.getElementById(buttonId);
+
+            if (!textarea) return;
+
+            const editor = CodeMirror.fromTextArea(textarea, {
+                lineNumbers: true,
+                mode: mode,
+                theme: theme,
+                readOnly: true,
+                highlightSelectionMatches: true,
+            });
+
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function () {
+                editor.refresh();
+            });
+
+            if (button) {
+                button.addEventListener('click', function () {
+                    const code = editor.getValue();
+                    const tempTextarea = document.createElement('textarea');
+                    tempTextarea.value = code;
+                    document.body.appendChild(tempTextarea);
+                    tempTextarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempTextarea);
+
+                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-clipboard"></i> Copy Code';
+                    }, 1500);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            //initializeCodeMirror("codeMirrorDemo", "copyCode", "htmlmixed", "monokai");
+            initializeCodeMirror("codeMirrorDemo", "copyCode");
+            initializeCodeMirror("codeMirrorDemoMigrationUser", "copyCodeMigrationUser");
+            initializeCodeMirror("codeMirrorDemoMigrationUser1", "copyCodeMigrationUser1");
+            initializeCodeMirror("codeMirrorDemo1", "copyCode1");
+            initializeCodeMirror("codeMirrorDemo2", "copyCode2");
+            initializeCodeMirror("codeMirrorDemo3", "copyCode3");
+            initializeCodeMirror("codeMirrorDemo4", "copyCodeKernel");
+            initializeCodeMirror("codeMirrorDemo5", "copyCode5");
+            initializeCodeMirror("codeMirrorDemoMigratioStudent");
+            initializeCodeMirror("codeMirrorDemoMigratioStudent1", "copyCodeMigrationStudent1");
+            initializeCodeMirror("codeMirrorDemoModel", "copyCodeModel");
+            initializeCodeMirror("codeMirrorDemoMaster", "copyCodeMaster");
+            initializeCodeMirror("codeMirrorDemoModelUser", "copyCodeModelUser");
+            initializeCodeMirror("codeMirrorDemoSidebar", "copyCodeSidebar");
+            initializeCodeMirror("codeMirrorDemoDashControl", "copyCodeDashControl");
+            initializeCodeMirror("codeMirrorDemoDashRouteDash", "copyCodeDashRoute");
+            initializeCodeMirror("codeMirrorDemoDashRouteUpdate");
+            initializeCodeMirror("codeMirrorDemoDashRouteUpdateCode", "copyCodeDashUpdateCode");
+            initializeCodeMirror("codeMirrorDemoDashRouteName");
+            initializeCodeMirror("codeMirrorDemoDashRouteNameCode", "copyCodeDashNameCode");
+        });
+
+    </script>
+    
 </body>
 
 </html>
