@@ -33,6 +33,15 @@
                     <a class="nav-link" id="vert-tabs-right-nine-tab" data-toggle="pill" href="#vert-tabs-right-nine" role="tab" aria-controls="vert-tabs-right-nine" aria-selected="false">
                         Blade Templates
                     </a>
+                    <a class="nav-link" id="vert-tabs-right-ten-tab" data-toggle="pill" href="#vert-tabs-right-ten" role="tab" aria-controls="vert-tabs-right-ten" aria-selected="false">
+                        Crud Function
+                    </a>
+                    <a class="nav-link" id="vert-tabs-right-eleven-tab" data-toggle="pill" href="#vert-tabs-right-eleven" role="tab" aria-controls="vert-tabs-right-eleven" aria-selected="false">
+                        Routes
+                    </a>
+                    <a class="nav-link" id="vert-tabs-right-twelve-tab" data-toggle="pill" href="#vert-tabs-right-twelve" role="tab" aria-controls="vert-tabs-right-twelve" aria-selected="false">
+                        Your own task
+                    </a>
                 </div>
             </div>
         </div>
@@ -44,7 +53,7 @@
         <div class="tab-pane fade show active" id="vert-tabs-right-one" role="tabpanel" aria-labelledby="vert-tabs-right-one-tab">
             <div class="card">
                 <div class="card-body" id="">
-                    <h3 class="title-doc">Introducing Lorem PHP Master Framework</h3>
+                    <h3 class="title-doc">Introducing PHP Laravel Framework</h3>
                     <p style="text-align: justify; text-indent: 50px;">
                         Laravel is a web application framework with expressive, elegant syntax. A web framework provides a structure and starting point for creating your application, allowing you to focus on creating something amazing while we sweat the details.
                     </p>
@@ -92,7 +101,7 @@
                     </p>
                     <p style="font-style: italic; color: #fff;">1. After you have installed PHP and Composer, you may create a new Lorem PHP Master project via the Composer "create-project" command below:</p>
 
-                    <code class="language-php" data-icon="&#xf0ea;">composer create-project laravel/laravel:^9.0 example-app</code>
+                    <code class="language-php" data-icon="&#xf0ea;">composer create-project laravel/laravel:^9.0 yourprojectname</code>
 
                     <br>
                     <p style="font-style: italic; color: #fff;">2. After you have create a project just browse it any browser, just type 
@@ -185,7 +194,7 @@
                             <span style="color: #D3423E;">&lt;?php</span>
                             <span style="color: #BFC7D5;"> </span>
                             <span style="color: #C792EA;">header</span>
-                            <span style="color: #BEC5D4;">("Location: public/your-porject-name");</span>
+                            <span style="color: #BEC5D4;">("Location: public/yourprojectname");</span>
                             <span style="color: #D3423E;">?&gt;</span></div>
                     </code>
                 </div>
@@ -302,8 +311,8 @@
     <link rel="stylesheet" href="@{{ asset('template/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="@{{ asset('template/dist/css/adminlte.css') }}">
-    <!-- Logo for demo purposes -->
-    <link rel="shortcut icon" type="" href="@{{ asset('template/img/CPSU_L.png') }}">
+    <!-- Logo  -->
+    <link rel="shortcut icon" type="" href="@{{ asset('template/dist/img/AdminLTELogo.png') }}">
 
     <style type="text/css">
         .login-box{
@@ -613,7 +622,7 @@ class RedirectIfAuthenticated
 
                     <br>
                     <p style="font-style: italic; color: #fff;">
-                        8. Open your <b class="title-doc">routes</b> folder directory, then select the <b class="ins-doc">web.php</b>, and take a look whats the difference between the default code to the code below being provide. but you can copy and paste all the code below to replace the default code:
+                        8. Open your <b class="title-doc">routes</b> folder directory, then select the <b class="ins-doc">web.php</b>, and take a look whats the difference between the default code to the code below being provided. but you can copy and paste all the code below to replace the default code:
                     </p>
                     
                     <div class="position-relative">
@@ -711,6 +720,7 @@ Schema::create('users', function (Blueprint $table) {
     $table->string('fname');
     $table->string('mname');
     $table->string('lname');
+    $table->string('ext')->nullable();
     $table->string('username');
     $table->string('password');
     $table->string('role');
@@ -724,9 +734,10 @@ DB::table('users')->insert([
     'fname' => 'Admin',
     'mname' => 'Admin',
     'lname' => 'Admin',
+    'ext' => null,
     'username' => 'admin',
     'password' => bcrypt('admin'),
-    'role' => 'admin',
+    'role' => 'Administrator',
     'gender' => 'Male',
     'posted_by' => 1,
     'remember_token' => 'q6V6HO6zeXulTYE5kcoAT6oOeKrxwSjLKZo2BsUuVPbi8wfW4WDV2VA4n1Vi',
@@ -929,6 +940,7 @@ class User extends Authenticatable
         'lname',
         'fname',
         'mname',
+        'ext',
         'username',
         'password',
         'role',
@@ -987,6 +999,7 @@ class User extends Authenticatable
                     <br>
 
                     <h3 class="title-doc">How?</h3>
+                    <p>The file <b class="ins-doc">master.blade.php</b> is called a layout template. It serves as the main structure or base design of your webpage.nstead of repeating the same HTML layout like <b class="title-doc">(&lt;html&gt;, &lt;head&gt;, and &lt;body&gt;)</b> in every view file, you define it once in this master file. Then, other pages can simply extend this layout and inject their own content into the sections like ( <b class="title-doc">@@yield('title')</b> and <b class="title-doc">@@yield('body')</b> ).</p>
                     <p style="font-style: italic; color: #fff;">
                         1. In the <b class="ins-doc">resources/views</b> folder, create a new folder and name it <b class="ins-doc">layouts</b> and under that folder create a filename <b class="ins-doc">master.blade.php</b> copy and paste the code below:
                     </p> 
@@ -1001,7 +1014,8 @@ class User extends Authenticatable
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Starter</title>
+    <meta name="csrf-token" content="@{{ csrf_token() }}">
+    <title>@@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -1013,6 +1027,12 @@ class User extends Authenticatable
     <link rel="stylesheet" href="@{{ asset('template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="@{{ asset('template/dist/css/adminlte.min.css') }}">
+    <!-- DataTables  -->
+    <link rel="stylesheet" href="@{{ asset('template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="@{{ asset('template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="@{{ asset('template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <!-- Logo  -->
+    <link rel="shortcut icon" type="" href="@{{ asset('template/dist/img/AdminLTELogo.png') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm">
@@ -1226,6 +1246,19 @@ class User extends Authenticatable
     <script src="@{{ asset('template/plugins/toastr/toastr.min.js') }}"></script>
     <!-- SweetAlert2 -->
     <script src="@{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="@{{ asset('template/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script> 
+    <script src="@{{ asset('template/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="@{{ asset('template/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="@{{ asset('template/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
     <script>
         @@if(Session::has('error'))
@@ -1247,8 +1280,19 @@ class User extends Authenticatable
             toastr.success("{{ session('success') }}")
         @@endif
     </script>
-</body>
 
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": true, 
+                "autoWidth": true,
+                //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+</body>
 </html>
                         </textarea>
                     </div>
@@ -1271,6 +1315,7 @@ class User extends Authenticatable
 
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-header" style="color: gray">Main Navigation</li>
         <li class="nav-item">
             <a href="@{{ route('dashboard') }}" class="nav-link @{{ $dashAdActive }}">
                 <i class="nav-icon fas fa-th"></i>
@@ -1292,6 +1337,16 @@ class User extends Authenticatable
                 <i class="nav-icon fas fa-user-gear"></i>
                 <p>
                     Users
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-header" style="color: gray">Reports</li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file-pdf"></i>
+                <p>
+                    Reports
                 </p>
             </a>
         </li>
@@ -1446,7 +1501,108 @@ Route::group(['middleware'=>['login_auth']],function(){
 
                     <br>
                     <p style="font-style: italic; color: #fff;">
-                        9. And now try to run your code or system on your browser, open <b class="title-doc">Chrome</b> browser or any kind of browser but highly recommended is chrome, and type <b class="ins-doc">localhost/yourprojectname</b> and it will display like this and try to login using the credentials: Username: <b class="ins-doc">admin</b>  and Password: <b class="ins-doc">admin</b>.
+                        9. Open <b class="title-doc">resources/views</b> folder directory, and make a folder name <b class="title-doc">home</b> and under that folder make a filename <b class="ins-doc">dashboard.blade.php</b> file.
+                     </p>
+                     <div class="position-relative" style="margin-top: -15px;">
+                        <button id="copyCodeDashboardCode" class="btn btn-sm btn-light position-absolute" style="top: 10px; right: 30px; z-index: 10;">
+                            <i class="fas fa-clipboard"></i> Copy Code
+                        </button>
+                         <textarea id="codeMirrorDemoDashboardRouteName" class="p-3">
+@@extends('layouts.master')
+
+@@section('title')
+    Dashboard
+@@endsection
+
+@@section('body')
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>150</h3>
+            
+                            <p>New Orders</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+            
+                            <p>Bounce Rate</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>44</h3>
+            
+                            <p>User Registrations</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>65</h3>
+            
+                            <p>Unique Visitors</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@@endsection
+                         </textarea>
+                     </div>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        10. And now try to run your code or system on your browser, open <b class="title-doc">Chrome</b> browser or any kind of browser but highly recommended is chrome, and type <b class="ins-doc">localhost/yourprojectname</b> and it will display like this and try to login using the credentials: Username: <b class="ins-doc">admin</b>  and Password: <b class="ins-doc">admin</b>.
                     </p>
                     <div style="margin-top: -15px;">
                         <img src="{{ asset('template/img/blog/img11.png') }}" alt="photo" width="100%" height="100%">
@@ -1454,17 +1610,766 @@ Route::group(['middleware'=>['login_auth']],function(){
 
                     <br>
                     <p style="font-style: italic; color: #fff;">
-                        10. After Successfull login you will redirect to dashboard.
+                        11. After Successfull login you will redirect to dashboard.
                     </p>
                     <div style="margin-top: -15px;">
-                        <img src="{{ asset('template/img/blog/img13.png') }}" alt="photo" width="100%" height="100%">
+                        <img src="{{ asset('template/img/blog/img13.png') }}" alt="photo" width="100%" height="100%" style="border: 2px solid gray;">
                     </div>
 
                 </div>
             </div>
         </div>
 
-        
+        <div class="tab-pane fade show" id="vert-tabs-right-ten" role="tabpanel" aria-labelledby="vert-tabs-right-ten-tab">
+            <div class="card">
+                <div class="card-body" id="">
+                    <h3 class="title-doc">Understanding Laravel CRUD Functionality</h3> 
+                    <p style="text-align: justify; text-indent: 50px;">
+                        Laravel CRUD stands for Create, Read, Update, and Delete — the four basic operations used in managing data in a database. Laravel simplifies these operations through its built-in routing, controllers, Eloquent ORM, and Blade templating. With just a few lines of code, you can build secure and efficient applications that interact with your database, making Laravel ideal for rapid web development. 
+                    </p>
+                    <br>
+
+                    <h3 class="title-doc">How?</h3>
+                    <p style="font-style: italic; color: #fff;">
+                        1. In Terminal run this <b class="title-doc">command</b>, just copy and paste the command/code below, hit enter on your keyboard:
+                    </p>
+                    <code class="language-php" data-icon="&#xf0ea;">php artisan make:controller UsersController</code>
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        2. And you will see like this in terminal after you run the command:
+                    </p>
+                    <div style="margin-top: -15px;">
+                        <img src="{{ asset('template/img/blog/img14.png') }}" alt="photo" width="100%" height="100%">
+                    </div>
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        3. Open again <b class="title-doc">app/Http/Controllers</b> folders directory, then select the <b class="ins-doc">UsersController.php</b>, and take a look whats the difference between the default code to the code below being provide. but you can copy and paste the code below.:
+                    </p>
+                    <div class="position-relative" style="margin-top: -15px;">
+                        <button id="copyCodeUsersCode" class="btn btn-sm btn-light position-absolute" style="top: 10px; right: 30px; z-index: 10;">
+                            <i class="fas fa-clipboard"></i> Copy Code
+                        </button>
+                        <textarea id="codeMirrorDemoUsersRouteName" class="p-3">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+
+use App\Models\User;
+
+class UsersController extends Controller
+{
+    public function userRead()
+    {
+        $users = User::orderBy('id', 'ASC')->get();
+        return view('users.listusers', compact('users'));
+    }
+
+    public function userCreate(Request $request) 
+    {
+
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'lname' => 'required',
+                'fname' => 'required',
+                'mname' => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'role' => 'required',
+            ]);
+
+            $userName = $request->input('username'); 
+            $existingUsername = User::where('username', $userName)->first();
+
+            if ($existingUsername) {
+                return redirect()->route('userRead')->with('error', 'User already exists!');
+            }
+
+            try {
+                User::create([
+                    'lname' => $request->input('lname'),
+                    'fname' => $request->input('fname'),
+                    'mname' => $request->input('mname'),
+                    'ext' => $request->input('ext'),
+                    'username' => $userName,
+                    'password' => Hash::make($request->input('password')),
+                    'role' => $request->input('role'),
+                    'gender' => $request->input('gender'),
+                    'posted_by' => Auth::guard('web')->user()->id,
+                    'remember_token' => Str::random(64),
+                ]);
+
+                return redirect()->route('userRead')->with('success', 'User stored successfully!');
+            } catch (\Exception $e) {
+                return redirect()->route('userRead')->with('error', 'Failed to store user!');
+            }
+        }
+    }
+
+    public function userEdit($id)
+    {
+        $userid = User::find($id);
+
+        return view('users.edituser', compact('userid'));
+    }
+
+    public function userUpdate(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'lname' => 'required',
+            'fname' => 'required',
+            'mname' => 'required',
+            'username' => 'required',
+            'role' => 'required',
+        ]);
+
+        try {
+            $userName = $request->input('username'); 
+            $existingEmail = User::where('username', $userName)
+                        ->where('id', '!=', $request->input('id'))
+                        ->first();
+
+            if ($existingEmail) {
+                return redirect()->route('userRead')->with('error', 'User already exists!');
+            }
+
+            $user = User::findOrFail($request->input('id'));
+            $user->update([
+                'lname' => $request->input('lname'),
+                'fname' => $request->input('fname'),
+                'mname' => $request->input('mname'),
+                'ext' => $request->input('ext'),
+                'username' => $userName,
+                'role' => $request->input('role'),
+                'gender' => $request->input('gender'),
+                'posted_by' => Auth::guard('web')->user()->id,
+            ]);
+
+            return redirect()->route('userRead')->with('success', 'User Updated successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to update User!');
+        }
+    }
+
+    public function userPassUpdate(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'password' => 'required',
+        ]);
+
+        try {
+            $userpass = User::findOrFail($request->input('id'));
+            $userpass->update([
+                'password' => Hash::make($request->input('password')),
+            ]);
+
+            return redirect()->route('userRead')->with('success', 'User Password Updated Successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to update User Password!');
+        }
+    }
+
+    public function userDelete($id)
+    {
+        User::Destroy($id);
+        return redirect()->back()->with('success', 'User deleted successfully.');
+    }
+}
+                        </textarea>
+                    </div>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        4. In the <b class="ins-doc">resources/views</b> folder, create a new folder and name it <b class="ins-doc">users</b> and under that folder create a filename <b class="ins-doc">listusers.blade.php</b> copy and paste the code below:
+                    </p> 
+                    <div class="position-relative" style="margin-top: -15px;">
+                        <button id="copyCodeUsersBladeCode" class="btn btn-sm btn-light position-absolute" style="top: 10px; right: 30px; z-index: 10;">
+                            <i class="fas fa-clipboard"></i> Copy Code
+                        </button>
+                        <textarea id="codeMirrorDemoUsersBladeName" class="p-3">
+@@extends('layouts.master')
+
+@@section('title')
+    Users
+@@endsection
+
+@@section('body')
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Users</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Users</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-user">
+                                    <i class="fas fa-user-plus"></i> Add New
+                                </button>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-hover" id="example1">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>First name</th>
+                                        <th>Middle name</th>
+                                        <th>Last name</th>
+                                        <th>Gender</th>
+                                        <th>Username</th>
+                                        <th>Level</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @@foreach ($users as $user)
+                                        <tr>
+                                            <td>@{{ $user->id }}</td>
+                                            <td>@{{ $user->fname }}</td>
+                                            <td>@{{ $user->mname }}</td>
+                                            <td>@{{ $user->lname }}</td>
+                                            <td>@{{ $user->gender }}</td>
+                                            <td>@{{ $user->username }}</td>
+                                            <td>
+                                                <span class="badge @{{ $user->role == 'Administrator' ? 'badge-primary' : 'badge-secondary' }}">
+                                                    @{{ $user->role }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="@{{ route('userEdit', ['id' => $user->id]) }}"  class="btn btn-success btn-sm">
+                                                    <i class="fas fa-pen"></i>
+                                                </a>
+                                                <button class="btn btn-danger btn-sm delete-user" data-id="@{{ $user->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @@endforeach                     
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-user">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-plus"></i> Add User
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form class="form-horizontal" action="@{{ route('userCreate') }}" method="post" id="addUser">  
+                    @@csrf
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label><span class="badge badge-secondary">First Name:</span></label>
+                                <input type="text" name="fname" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter First Name" class="form-control form-control-sm">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label><span class="badge badge-secondary">Middle Name:</span></label>
+                                <input type="text" name="mname" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter Middle Name" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label><span class="badge badge-secondary">Last Name:</span></label>
+                                <input type="text" name="lname" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter Last Name" class="form-control form-control-sm">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label><span class="badge badge-secondary">Ext.:</span></label>
+                                <select class="form-control form-control-sm" name="ext">
+                                    <option value="">N/A</option>
+                                    <option value="Jr." @@if (old('ext') == "Jr.") @{{ 'selected' }} @@endif>Jr.</option>
+                                    <option value="Sr." @@if (old('ext') == "Sr.") @{{ 'selected' }} @@endif>Sr.</option>
+                                    <option value="III" @@if (old('ext') == "III") @{{ 'selected' }} @@endif>III</option>
+                                    <option value="IV" @@if (old('ext') == "IV") @{{ 'selected' }} @@endif>IV</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group"> 
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label><span class="badge badge-secondary">Username</span></label>
+                                <input type="text" name="username" placeholder="Enter Username" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-6">
+                                <label><span class="badge badge-secondary">Password:</span></label>
+                                <input type="password" name="password" placeholder="Enter Password" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group"> 
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label><span class="badge badge-success">Gender</span></label>
+                                <select class="form-control form-control-sm" name="gender">
+                                    <option disabled selected> --Select-- </option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label><span class="badge badge-success">User Level</span></label>
+                                <select class="form-control form-control-sm" name="role">
+                                    <option disabled selected> -- Select-- </option>
+                                    <option value="Administrator">Administrator</option>
+                                    <option value="User">User</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>   
+                </form>
+            </div>
+            
+            <div class="modal-footer justify-content-between">
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="delete-form" method="POST" style="display: none;">
+    @@csrf
+    @@method('DELETE')
+</form> 
+
+<script>
+    document.querySelectorAll('.delete-user').forEach(button => {
+        button.addEventListener('click', function () {
+            const userId = this.getAttribute('data-id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This user will be permanently deleted.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = document.getElementById('delete-form');
+                    if (!form) {
+                        console.error('Form with id delete-form not found!');
+                        return;
+                    }
+
+                    form.setAttribute('action', '@{{ route('userDelete', ':id') }}'.replace(':id', userId));
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+
+@@endsection
+                        </textarea>
+                    </div>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        5. Then under also the <b class="ins-doc">resources/views/users</b> folder directory, create a filename <b class="ins-doc">edituser.blade.php</b> copy and paste the code below:
+                    </p> 
+                    <div class="position-relative" style="margin-top: -15px;">
+                        <button id="copyCodeUsersEditBladeCode" class="btn btn-sm btn-light position-absolute" style="top: 10px; right: 30px; z-index: 10;">
+                            <i class="fas fa-clipboard"></i> Copy Code
+                        </button>
+                        <textarea id="codeMirrorDemoUserEditBladeName" class="p-3">
+@@extends('layouts.master')
+
+@@section('title')
+    Edit User
+@@endsection
+
+@@section('body')
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Edit User</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="@{{ route('userRead') }}">Users</a></li>
+                        <li class="breadcrumb-item active">Edit User</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Edit
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-horizontal" action="@{{ route('userUpdate', $userid->id) }}" method="post" id="updateUser">  
+                                @@csrf
+                                
+                                <input type="hidden" name="id" value="@{{ $userid->id }}">
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label><span class="badge badge-secondary">First Name:</span></label>
+                                            <input type="text" name="fname" value="@{{ $userid->fname }}" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter First Name" class="form-control form-control-sm">
+                                        </div>
+            
+                                        <div class="col-md-6">
+                                            <label><span class="badge badge-secondary">Middle Name:</span></label>
+                                            <input type="text" name="mname" value="@{{ $userid->mname }}" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter Middle Name" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label><span class="badge badge-secondary">Last Name:</span></label>
+                                            <input type="text" name="lname" value="@{{ $userid->lname }}" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter Last Name" class="form-control form-control-sm">
+                                        </div>
+            
+                                        <div class="col-md-6">
+                                            <label><span class="badge badge-secondary">Ext.:</span></label>
+                                            <select class="form-control form-control-sm" name="ext">
+                                                <option value="">N/A</option>
+                                                <option value="Jr." @@if ($userid->ext == "Jr.") selected @@endif>Jr.</option>
+                                                <option value="Sr." @@if ($userid->ext == "Sr.") selected @@endif>Sr.</option>
+                                                <option value="III" @@if ($userid->ext == "III") selected @@endif>III</option>
+                                                <option value="IV" @@if ($userid->ext == "IV") selected @@endif>IV</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group"> 
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <label><span class="badge badge-secondary">Username</span></label>
+                                            <input type="text" name="username" value="@{{ $userid->username }}" placeholder="Enter Username" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group"> 
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label><span class="badge badge-success">Gender</span></label>
+                                            <select class="form-control form-control-sm" name="gender">
+                                                <option disabled selected> --Select-- </option>
+                                                <option value="Male" @@if ($userid->gender == "Male") selected @@endif>Male</option>
+                                                <option value="Female" @@if ($userid->gender == "Female") selected @@endif>Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label><span class="badge badge-success">User Level</span></label>
+                                            <select class="form-control form-control-sm" name="role">
+                                                <option disabled selected> -- Select-- </option>
+                                                <option value="Administrator" @@if ($userid->role == "Administrator") selected @@endif>Administrator</option>
+                                                <option value="User" @@if ($userid->role == "User") selected @@endif>User</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-save"></i> Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Update Password
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-horizontal" action="@{{ route('userPassUpdate', $userid->id) }}" method="post" id="updatePassUser">  
+                                @@csrf
+                                
+                                <input type="hidden" name="id" value="@{{ $userid->id }}">
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <label><span class="badge badge-secondary">New Password:</span></label>
+                                            <input type="text" name="password" placeholder="Enter New Password" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-save"></i> Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@@endsection
+                        </textarea>
+                    </div>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        6. Then under also the <b class="ins-doc">resources/views/menu</b> folder directory, update the <b class="ins-doc">sidebar.blade.php</b> after the line <b class="title-doc">number 4</b> of you code and add this code below being provided, just copy and paste the code below:
+                    </p> 
+                    <div class="position-relative" style="margin-top: -15px;">
+                        <button id="copyCodeSidebaradded" class="btn btn-sm btn-light position-absolute" style="top: 10px; right: 30px; z-index: 10;">
+                            <i class="fas fa-clipboard"></i> Copy Code
+                        </button>
+                        <textarea id="codeMirrorDemoSidebaradded" class="p-3">
+$userActive = in_array($curr_route, ['userRead', 'userEdit']) ? 'active' : '';  
+                        </textarea>
+                    </div>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        7. And also the <b class="ins-doc">resources/views/menu</b> folder directory, update the <b class="ins-doc">sidebar.blade.php</b> on line <b class="title-doc">number 29</b> of you code and add this code below being provided, just copy and paste the code below:
+                    </p> 
+                    <div class="position-relative" style="margin-top: -15px;">
+                        <button id="copyCodeSidebaradded1" class="btn btn-sm btn-light position-absolute" style="top: 10px; right: 30px; z-index: 10;">
+                            <i class="fas fa-clipboard"></i> Copy Code
+                        </button>
+                        <textarea id="codeMirrorDemoSidebaradded1" class="p-3">
+<a href="@{{ route('userRead') }}" class="nav-link @{{ $userActive }}"> 
+                        </textarea>
+                    </div>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        8. And you will see your overall code in <b class="ins-doc">sidebar.blade.php</b> like this:
+                    </p>
+                    <div style="margin-top: -15px;">
+                        <img src="{{ asset('template/img/blog/img15.png') }}" alt="photo" width="100%" height="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab-pane fade show" id="vert-tabs-right-eleven" role="tabpanel" aria-labelledby="vert-tabs-right-eleven-tab">
+            <div class="card">
+                <div class="card-body" id="">
+                    <h3 class="title-doc">Laravel Basic Routing</h3> 
+                    <p style="text-align: justify; text-indent: 50px;">
+                        The most basic Laravel routes accept a URI and a closure, providing a very simple and expressive method of defining routes and behavior without complicated routing configuration files: For most applications, you will begin by defining routes in your routes/web.php file. The routes defined in <b class="title-doc">routes/web.php</b> may be accessed by entering the defined route's URL in your browser. For example, you may access the following route by navigating to http://example.com/user in your browser:
+                    </p>
+                    <br>
+
+                    <h3 class="title-doc">Example of basic routing</h3>
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        This is  only a sample don't copy and paste to your code:
+                    </p> 
+                    <div class="position-relative" style="margin-top: -15px;">
+                        <textarea id="codeMirrorDemoSampleroute" class="p-3">
+use Illuminate\Support\Facades\Route;
+
+Route::get('/greeting', function () {
+    return 'Hello World';
+});
+                        </textarea>
+                    </div>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        1. Open your <b class="title-doc">routes</b> folder directory, then select the <b class="ins-doc">web.php</b>, and take a look whats the difference between the default code to the code below being provided. but you can copy and paste all the code below to replace the default code:
+                    </p> 
+                    <div class="position-relative" style="margin-top: -15px;">
+                        <button id="copyCodeAddedRoute" class="btn btn-sm btn-light position-absolute" style="top: 10px; right: 30px; z-index: 10;">
+                            <i class="fas fa-clipboard"></i> Copy Code
+                        </button>
+                        <textarea id="codeMirrorDemoAddedRoute" class="p-3">
+&lt;?php
+
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsersController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::group(['middleware'=>['guest']],function(){
+    Route::get('/', function () {
+        return view('login');
+    });
+
+    //Login
+    Route::get('/login',[LoginController::class,'loginRead'])->name('loginRead');
+    Route::post('/login/process/user',[LoginController::class,'postLogin'])->name('postLogin');
+});
+
+//Middleware
+Route::group(['middleware'=>['login_auth']],function(){
+    Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+    Route::get('/logout',[DashboardController::class,'logout'])->name('logout');
+
+    Route::prefix('users/list')->group(function () {
+        Route::get('/view',[UsersController::class,'userRead'])->name('userRead');
+        Route::post('/view/create',[UsersController::class,'userCreate'])->name('userCreate');
+        Route::get('/view/edit/{id}',[UsersController::class,'userEdit'])->name('userEdit');
+        Route::post('/view/update/',[UsersController::class,'userUpdate'])->name('userUpdate');
+        Route::post('/view/update/pass',[UsersController::class,'userPassUpdate'])->name('userPassUpdate');
+        Route::delete('/view/users/{id}', [UsersController::class, 'userDelete'])->name('userDelete');
+    });
+});                            
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab-pane fade show" id="vert-tabs-right-twelve" role="tabpanel" aria-labelledby="vert-tabs-right-twelve-tab">
+            <div class="card">
+                <div class="card-body" id="">
+                    <h3 class="title-doc">What to do in your part?</h3> 
+                    <p style="text-align: justify;">
+                        1. You are going to to continue the Students part in our sidebar, in which you are going to create a <b class="ins-doc">Controller</b>, <b class="ins-doc">view</b> and <b class="ins-doc">Web Route</b>. The <b class="ins-doc">Model</b> is no need to add cause we already did it in the migrations part, just double check on it. You will create a <b class="ins-doc">CRUD</b> functions for the Students part and a generation of reports for Students using <b class="ins-doc">PDF</b>:
+                    </p>
+                    <p style="text-align: justify;">
+                        2. Add an Instructor in the sidebar under the Students, and you are also going to create a <b class="ins-doc">Controller</b>, <b class="ins-doc">view</b>, <b class="ins-doc">Model</b> and <b class="ins-doc">Web Route</b>. You will create a <b class="ins-doc">CRUD</b> functions for the Instructor part and a generation of reports for Instructor using <b class="ins-doc">PDF</b>:
+                    </p>
+                    <p style="text-align: justify;">
+                        3. In your <b class="ins-doc">Reports</b> button, will have a  choices of category in generating reports its either <b class="title-doc">Students</b> or <b class="title-doc">Instructors</b> and a button <b class="title-doc">Generate</b>.:
+                    </p>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        Use this <b class="ins-doc">command</b> below for the <b class="title-doc">PDF</b> library. Just copy and paste it in your terminal, hit enter in your keyboard and wait until its successfully installing the Libraries.
+                    </p> 
+                    <code class="language-php" data-icon="&#xf0ea;" style="margin-top: -15px;">composer require barryvdh/laravel-dompdf</code>
+
+
+                    <br>
+                    <br>
+                    <br>
+                    <h3 class="title-doc">Useful Commands to develop</h3> 
+                    <p style="font-style: italic; color: #fff;">
+                        Don't forget the <b class="ins-doc">command</b> to create a new <b class="title-doc">Controller</b> is like this below.
+                    </p> 
+                    <code class="language-php" data-icon="&#xf0ea;" style="margin-top: -15px;">php artisan make:controller YourController</code>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        Don't forget the <b class="ins-doc">command</b> to create a new <b class="title-doc">Model</b> is like this below.
+                    </p> 
+                    <code class="language-php" data-icon="&#xf0ea;" style="margin-top: -15px;">php artisan make:model YourModel</code>
+
+                    <br>
+                    <p style="font-style: italic; color: #fff;">
+                        Don't forget the <b class="ins-doc">command</b> to create a new <b class="title-doc">Migrations</b> is like this below.
+                    </p> 
+                    <code class="language-php" data-icon="&#xf0ea;" style="margin-top: -15px;">php artisan make:migration create_yourtablename_table</code>
+                    
+                </div>
+            </div>
+        </div>
+
 
     </div>
 </div>

@@ -463,10 +463,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
             initializeCodeMirror("codeMirrorDemoDashRouteUpdateCode", "copyCodeDashUpdateCode");
             initializeCodeMirror("codeMirrorDemoDashRouteName");
             initializeCodeMirror("codeMirrorDemoDashRouteNameCode", "copyCodeDashNameCode");
+            initializeCodeMirror("codeMirrorDemoDashboardRouteName", "copyCodeDashboardCode");
+            initializeCodeMirror("codeMirrorDemoUsersRouteName", "copyCodeUsersCode");
+            initializeCodeMirror("codeMirrorDemoUsersBladeName", "copyCodeUsersBladeCode");
+            initializeCodeMirror("codeMirrorDemoUserEditBladeName", "copyCodeUsersEditBladeCode");
+            initializeCodeMirror("codeMirrorDemoSampleroute");
+            initializeCodeMirror("codeMirrorDemoAddedRoute", "copyCodeAddedRoute");
+            initializeCodeMirror("codeMirrorDemoSidebaradded", "copyCodeSidebaradded");
+            initializeCodeMirror("codeMirrorDemoSidebaradded1", "copyCodeSidebaradded1");
         });
-
     </script>
     
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+    </script>
 </body>
 
 </html>
