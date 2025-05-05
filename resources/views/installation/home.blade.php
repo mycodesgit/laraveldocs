@@ -194,7 +194,7 @@
                             <span style="color: #D3423E;">&lt;?php</span>
                             <span style="color: #BFC7D5;"> </span>
                             <span style="color: #C792EA;">header</span>
-                            <span style="color: #BEC5D4;">("Location: public/yourprojectname");</span>
+                            <span style="color: #BEC5D4;">("Location: public/");</span>
                             <span style="color: #D3423E;">?&gt;</span></div>
                     </code>
                 </div>
